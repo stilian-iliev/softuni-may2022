@@ -58,9 +58,32 @@
                        type="text"
                        class="form-control"
                        placeholder="Email"/>
-                <p class="invalid-feedback errors alert alert-danger">
-                    Email is required and should be valid.
-                </p>
+                <div class="invalid-feedback errors alert alert-danger">
+<!--                   <div th:each="err : ${#fields.detailedErrors('email')}">-->
+<!--&lt;!&ndash;                       <p th:if="${err.getCode()}=='UniqueUserEmail'">User email should be unique!</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                       <p th:if="${err.getCode()}=='NotEmpty'">User email should be provided!</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                       <p th:if="${err.getCode()}=='Email'">User email should be valid!</p>&ndash;&gt;-->
+<!--                       <p th:text="${err.getMessage()}">Email error</p>-->
+<!--                   </div>-->
+
+                    <div th:each="err : ${#fields.errors('email')}">
+                        <!--                       <p th:if="${err.getCode()}=='UniqueUserEmail'">User email should be unique!</p>-->
+                        <!--                       <p th:if="${err.getCode()}=='NotEmpty'">User email should be provided!</p>-->
+                        <!--                       <p th:if="${err.getCode()}=='Email'">User email should be valid!</p>-->
+                        <p th:text="${err}">Email error</p>
+                    </div>
+
+                </div>
+
+                <h1>Start here</h1>
+                <ul th:if="${#fields.hasErrors('*')}">
+                    <li th:each="err : ${#fields.errors('*')}" th:text="${err}">
+                        Input is incorrect
+                    </li>
+                </ul>
+                <h1>End here</h1>
+
+
             </div>
             <div class="form-group col-md-6 mb-3">
                 <label for="password" class="text-white font-weight-bold">Password</label>
@@ -71,15 +94,19 @@
                        class="form-control"
                        placeholder="Password"/>
                 <p class="invalid-feedback errors alert alert-danger">
-                    Password is required and should be at least 5 symbols.
+                    Password is required, should be at least 5 symbols.
                 </p>
             </div>
         </div>
         <div class="form-group">
             <label for="confirmPassword" class="text-white font-weight-bold">Password</label>
-            <input id="confirmPassword" name="confirmPassword" type="password" min="2" max="20" class="form-control"
-                   placeholder="Password"/>
-            <p class="errors alert alert-danger">
+            <input id="confirmPassword"
+                   th:field="*{confirmPassword}"
+                   th:errorclass="is-invalid"
+                   type="password"
+                   class="form-control"
+                   placeholder="Confirm Password"/>
+            <p class="invalid-feedback errors alert alert-danger">
                 Passwords should match.
             </p>
         </div>
