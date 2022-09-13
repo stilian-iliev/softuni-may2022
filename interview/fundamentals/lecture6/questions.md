@@ -2,6 +2,7 @@
 
 1. Какво е Cookie?
 2. За какво служат cookies?
+за запазване на информация в клиентсия browser
 3. Какво е third party cookie?
 4. Какво е HTTP сесия?
 5. Как може в Spring до добавим атрибут в HTTP session?
